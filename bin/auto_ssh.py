@@ -7,14 +7,14 @@ def choose():
     hosts = of.readlines()
     while 1:
         print("=================SSH===================")
-        print("+{}+".format("-"*35))
-        print("|     UserName    IP:PORT")
+        print("+{}+".format("-"*40))
+        print("|     Alias   UserName@IP:PORT")
         l = len(hosts)
         for i in range(0, l):
-            v_list = hosts[i].split(" ")
-            print("+{}+".format("-"*35))
-            print("| {} | {} {}:{}".format(i+1, v_list[0], v_list[1], v_list[2]))
-        print("+{}+".format("-"*35))
+            v_list = hosts[i].strip().split(" ")
+            print("+{}+".format("-"*40))
+            print("| {} | {}   {}@{}:{}".format(i+1, v_list[4], v_list[0], v_list[1], v_list[2]))
+        print("+{}+".format("-"*40))
         c = raw_input("[SSH]Choose the number or name('#q' exit):")
         is_name = False
         is_y = False

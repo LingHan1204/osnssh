@@ -11,8 +11,8 @@ __author__ = 'allen woo'
 
 def main():
     while 1:
-        print("=================NOOBSSH=====================")
-        print("1.Connection between a host\n2.Add host\n3.Remove host")
+        print("=================NOOBSSH by Allen Woo=================")
+        print("1.Connection between a host\n2.Add host\n3.Remove host\n#q:quit")
         c = raw_input()
         if c == 1 or c == "1":
             auto_ssh.choose()
@@ -22,6 +22,9 @@ def main():
             setting.remove_host()
         elif c == "clear":
             os.system("clear")
+        elif c == "q" or c == "Q":
+            print("Bye")
+            sys.exit()
         else:
             print("\n")
        
