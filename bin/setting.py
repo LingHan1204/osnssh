@@ -106,12 +106,13 @@ def remove_host():
             n = 0
             for l in hosts:
                 if c.strip() == l.split(" ")[4].strip():
-                    del hosts[c-1]
+                    del hosts[n]
                     is_y = True 
                 n += 1
                    
                     
         if not is_y:
+            print("[Warning]:There is no")
             continue
         else:
             
