@@ -16,8 +16,8 @@ def choose():
             print("+{}+".format("-"*40))
             print("| {} | {}   {}@{}:{}".format(i+1, v_list[4], v_list[0], v_list[1], v_list[2]))
         print("+{}+".format("-"*40))
-        c = raw_input("[SSH]Choose the number or name('#q' exit):")
-        is_name = False
+        c = raw_input("[SSH]Choose the number or alias('#q' exit):")
+        is_alias = False
         is_y = False
         try:
             c = int(c)
@@ -32,12 +32,12 @@ def choose():
             is_y = True
             
         except:
-            is_name = True
-        if is_name:
+            is_alias = True
+        if is_alias:
             if c.strip() == "#q":
                 return
             for l in hosts:
-                if c.strip() == l.split(" ")[0].strip():
+                if c.strip() == l.split(" ")[4].strip():
                     l_list = l.split(" ")
                     name = l_list[0]
                     host = l_list[1]

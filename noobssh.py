@@ -18,7 +18,7 @@ def main():
         if c == 1 or c == "1":
             auto_ssh.choose()
         if c == 2 or c == "2":
-            setting.main()
+            setting.add_host_main()
         if c == 3 or c == "3":
             setting.remove_host()
         elif c == "clear":

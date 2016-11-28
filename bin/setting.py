@@ -6,7 +6,7 @@ import re, base64, os
 __author__ = 'allen woo'
 '''
 
-def main():
+def add_host_main():
     while 1:
         if add_host():
             break
