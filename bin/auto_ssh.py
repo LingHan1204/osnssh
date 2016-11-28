@@ -48,6 +48,7 @@ def choose():
         if not is_y:
             continue
 
+
         # ssh
         password = base64.decodestring(password)
 
