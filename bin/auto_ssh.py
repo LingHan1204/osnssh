@@ -32,7 +32,7 @@ def choose():
             is_name = True
         if is_name:
             if c.strip() == "#q":
-                break
+                return
             for l in hosts:
                 if c.strip() == l.split(" ")[0].strip():
                     l_list = l.split(" ")
