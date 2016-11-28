@@ -12,8 +12,7 @@ def choose():
         for i in range(0, l):
             v_list = hosts[i].split(" ")
             print("{}: {} {}:{}".format(i+1, v_list[0], v_list[1], v_list[2]))
-        print("[SSH]Choose the number or name(#q exit):")
-        c = raw_input()
+        c = raw_input("[SSH]Choose the number or name(#q exit):")
         is_name = False
         is_y = False
         try:

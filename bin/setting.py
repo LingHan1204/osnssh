@@ -73,8 +73,7 @@ def remove_host():
         for i in range(0, l):
             v_list = hosts[i].split(" ")
             print("{}: {} {}:{}".format(i+1, v_list[0], v_list[1], v_list[2]))
-        print("[Remove]Choose the number or name(#q to exit):")
-        c = raw_input()
+        c = raw_input("[Remove]Choose the number or name(#q to exit):")
         is_name = False
         is_y = False
         try:
@@ -104,9 +103,12 @@ def remove_host():
         else:
             break
     # save
-    of = open("./data/information.d", "w")
-    for l in hosts:
-        of.write(l)
+    c = raw_input("Remove?[y/n]:")
+    if c.strip().upper() == "Y":
+        of = open("./data/information.d", "w")
+        for l in hosts:
+            of.write(l)
+        print("Remove the success！")
 
 if __name__ == '__main__':
     main()
