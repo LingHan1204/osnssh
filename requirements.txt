@@ -1,0 +1,10 @@
+argparse==1.2.1
+numpy==1.11.2
+pexpect==4.2.1
+protobuf==3.0.0b2
+ptyprocess==0.5.1
+scipy==0.18.1
+six==1.10.0
+tensorflow==0.8.0
+wheel==0.29.0
+wsgiref==0.1.2
