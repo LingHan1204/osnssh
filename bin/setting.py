@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #-*-coding:utf-8-*-
-import re, base64
+import re, base64, os
 '''
 选项配置管理
 __author__ = 'allen woo'
@@ -14,6 +14,7 @@ def main():
 
    
 def add_host():
+    
     print("================Add=====================")
     print("[Help]Input '#q' exit")
     host_ip = str_format("Host IP:", "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$")
@@ -72,6 +73,7 @@ def add_host():
     
 def remove_host():
     while 1:
+        
         of = open("./data/information.d")
         hosts = of.readlines()
         of.close

@@ -6,6 +6,7 @@ def choose():
     of = open("./data/information.d")
     hosts = of.readlines()
     while 1:
+        
         print("=================SSH===================")
         print("+{}+".format("-"*40))
         print("|     Alias   UserName@IP:PORT")

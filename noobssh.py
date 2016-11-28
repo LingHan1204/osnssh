@@ -11,8 +11,9 @@ __author__ = 'allen woo'
 
 def main():
     while 1:
+        
         print("=================NOOBSSH by Allen Woo=================")
-        print("1.Connection between a host\n2.Add host\n3.Remove host\n#q:quit")
+        print("1.Connection between a host\n2.Add host\n3.Remove host\n[Help]: q:quit")
         c = raw_input()
         if c == 1 or c == "1":
             auto_ssh.choose()
