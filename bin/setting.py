@@ -15,15 +15,26 @@ def main():
    
 def add_host():
     print("================Add=====================")
+    print("[Help]Input '#q' exit")
     host_ip = str_format("Host IP:", "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$")
+    if host_ip == "#q":
+        return 1
     
     host_port = str_format("Host port(Default 22):", "[0-9]+")
+    if host_port == "#q":
+        return 1
     
-    password = base64.encodestring(str_format("Password:", ".*"))
+    password = str_format("Password:", ".*")
+    if password == "#q":
+        return 1
+    password = base64.encodestring(password)
     name = str_format("User Name:", "^[^ ]+$")
-    if not name:
+    if name == "#q":
+        return 1
+    elif not name:
         print("[Warning]:User name cannot be emptyg")
         return 0
+        
     try:
         of = open("./data/information.d")
     except:
@@ -48,32 +59,21 @@ def add_host():
     of.close()
     return 1
     
-def str_format(lable, rule):
-    while 1:
-        print(lable)
-        temp = raw_input()
-        m = re.match(r"{}".format(rule), temp)
-        if m:
-            break
-        if "port" in lable:
-            temp = 22
-            break
-        print("[Warning]:Invalid format")
-    
-    return temp
-    
 def remove_host():
     of = open("./data/information.d")
     hosts = of.readlines()
     of.close
     while 1:
         print("================Remove================")
-        print("    UserName     IP:PORT")
+        print("+{}+".format("-"*35))
+        print("|     UserName    IP:PORT")
         l = len(hosts)
         for i in range(0, l):
             v_list = hosts[i].split(" ")
-            print("{}: {} {}:{}".format(i+1, v_list[0], v_list[1], v_list[2]))
-        c = raw_input("[Remove]Choose the number or name(#q to exit):")
+            print("+{}+".format("-"*35))
+            print("| {} | {} {}:{}".format(i+1, v_list[0], v_list[1], v_list[2]))
+        print("+{}+".format("-"*35))
+        c = raw_input("[Remove]Choose the number or name('#q' to exit):")
         is_name = False
         is_y = False
         try:
@@ -103,6 +103,8 @@ def remove_host():
         else:
             break
     # save
+    if c.strip() == "#q":
+        return
     c = raw_input("Remove?[y/n]:")
     if c.strip().upper() == "Y":
         of = open("./data/information.d", "w")
@@ -110,6 +112,21 @@ def remove_host():
             of.write(l)
         print("Remove the success！")
 
-if __name__ == '__main__':
-    main()
+
+def str_format(lable, rule):
+    while 1:
+        print(lable)
+        temp = raw_input()
+        m = re.match(r"{}".format(rule), temp)
+        if m:
+            break
+        elif "port" in lable:
+            temp = 22
+            break
+        elif temp.strip() == "#q":
+            break
+        print("[Warning]:Invalid format")
+    
+    return temp
+
     
