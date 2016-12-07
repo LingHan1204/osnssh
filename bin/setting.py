@@ -44,12 +44,8 @@ def add_host():
         print("[Warning]:Alias cannot be emptyg")
         return 0
         
-    try:
-        of = open("./data/information.d")
-    except:
-        of = open("./data/information.d", "w")
-        of.close()
-        of = open("./data/information.d")
+
+    of = open("./data/information.d")
     hosts = of.readlines()
     for l in hosts:
         l = l.strip("\n")
@@ -77,10 +73,15 @@ def remove_host():
         of = open("./data/information.d")
         hosts = of.readlines()
         of.close
+        l = len(hosts)
+        if l <= 0:
+            os.system("clear")
+            print("[Warning]There is no host")
+            return
+            
         print("================Remove================")
         print("+{}+".format("-"*40))
         print("|     Alias   UserName@IP:PORT")
-        l = len(hosts)
         for i in range(0, l):
             v_list = hosts[i].strip().split(" ")
             print("+{}+".format("-"*40))
@@ -92,6 +93,7 @@ def remove_host():
         try:
             c = int(c)
             if c > l or c < 1:
+                os.system("clear")
                 print("[Warning]:There is no")
                 continue
             del hosts[c-1]
@@ -101,6 +103,7 @@ def remove_host():
             is_alias = True
         if is_alias:
             if c.strip() == "#q":
+                os.system("clear")
                 break
                 
             n = 0
@@ -112,6 +115,7 @@ def remove_host():
                    
                     
         if not is_y:
+            os.system("clear")
             print("[Warning]:There is no")
             continue
         else:
@@ -137,6 +141,7 @@ def str_format(lable, rule):
             temp = 22
             break
         elif temp.strip() == "#q":
+            os.system("clear")
             break
         print("[Warning]:Invalid format")
     

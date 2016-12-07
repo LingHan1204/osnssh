@@ -12,9 +12,10 @@ __author__ = 'allen woo'
 def main():
     while 1:
         
-        print("=================NOOBSSH by Allen Woo=================")
-        print("1.Connection between a host\n2.Add host\n3.Remove host\n[Help]: q:quit")
-        c = raw_input()
+        print("==============NOOBSSH [Menu]=============")
+        print("1.Connection between a host\n2.Add host\n3.Remove host\n[Help]: q:quit   clear:clear screen")
+        print("="*40)
+        c = raw_input("Please select a:")
         if c == 1 or c == "1":
             auto_ssh.choose()
         if c == 2 or c == "2":
@@ -31,5 +32,10 @@ def main():
        
 
 if __name__ == '__main__':
+    try:
+        of = open("./data/information.d")
+    except:
+        of = open("./data/information.d", "w")
+    of.close()
     main()
         

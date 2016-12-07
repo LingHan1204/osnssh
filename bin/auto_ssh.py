@@ -5,12 +5,18 @@ import os, sys, base64
 def choose():
     of = open("./data/information.d")
     hosts = of.readlines()
+    l = len(hosts)
+    if l <= 0:
+        os.system("clear")
+        print("[Warning]Please add the host server")
+        return
+            
     while 1:
         
         print("=================SSH===================")
         print("+{}+".format("-"*40))
         print("|     Alias   UserName@IP:PORT")
-        l = len(hosts)
+        print "---------",l
         for i in range(0, l):
             v_list = hosts[i].strip().split(" ")
             print("+{}+".format("-"*40))
@@ -22,6 +28,7 @@ def choose():
         try:
             c = int(c)
             if c > l or c < 1:
+                os.system("clear")
                 print("[Warning]:There is no")
                 continue
             l_list = hosts[c-1].split(" ")
@@ -35,10 +42,11 @@ def choose():
             is_alias = True
         if is_alias:
             if c.strip() == "#q":
+                os.system("clear")
                 return
-            for l in hosts:
-                if c.strip() == l.split(" ")[4].strip():
-                    l_list = l.split(" ")
+            for h in hosts:
+                if c.strip() == h.split(" ")[4].strip():
+                    l_list = h.split(" ")
                     name = l_list[0]
                     host = l_list[1]
                     port = l_list[2]
