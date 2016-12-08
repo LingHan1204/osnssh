@@ -63,6 +63,7 @@ def choose():
         password = base64.decodestring(password)
 
         print("In the connection...")
+        print("{}@{}".format(name, host))
         if port == "22":
             connection("ssh {}@{}".format(name, host), password)
            
@@ -72,11 +73,15 @@ def choose():
 def connection(cmd, pwd):
     import pexpect
     child = pexpect.spawn(cmd)
-    i = child.expect([".*password.*",pexpect.EOF, pexpect.TIMEOUT])
+    i = child.expect([".*password.*", ".*continue.*?", pexpect.EOF, pexpect.TIMEOUT])
     if( i == 0 ):
         child.sendline("{}\n".format(pwd))
         child.interact()
+    elif( i == 1):
+        child.sendline("yes\n")
+        child.sendline("{}\n".format(pwd))
         
+        #child.interact()    
     else:
         print("[Error]The connection fails")
 
