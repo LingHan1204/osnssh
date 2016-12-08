@@ -3,6 +3,7 @@
 import os, sys
 sys.path.append("../")
 from bin import setting, auto_ssh
+path = os.path.dirname(os.path.abspath(sys.argv[0]))
 '''
 方便在LINUX终端使用ssh,保存使用的IP:PORT , PASSWORD
 自动登录
@@ -32,10 +33,11 @@ def main():
        
 
 if __name__ == '__main__':
+    
     try:
-        of = open("./data/information.d")
+        of = open("{}/data/information.d".format(path))
     except:
-        of = open("./data/information.d", "w")
+        of = open("{}/data/information.d".format(path), "w")
     of.close()
     main()
         

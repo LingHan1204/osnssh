@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #-*-coding:utf-8-*-
-import re, base64, os
+import re, base64, os, sys
+path = os.path.dirname(os.path.abspath(sys.argv[0]))
 '''
 选项配置管理
 __author__ = 'allen woo'
@@ -45,7 +46,7 @@ def add_host():
         return 0
         
 
-    of = open("./data/information.d")
+    of = open("{}/data/information.d".format(path))
     hosts = of.readlines()
     for l in hosts:
         l = l.strip("\n")
@@ -62,7 +63,7 @@ def add_host():
     of.close()
     
     # save
-    of = open("./data/information.d", "a")
+    of = open("{}/data/information.d".format(path), "a")
     of.write("{} {} {} {} {}".format(name.strip("\n"), host_ip.strip("\n"), host_port, password.strip("\n"), alias.strip("\n")))
     of.close()
     return 1
@@ -70,7 +71,7 @@ def add_host():
 def remove_host():
     while 1:
         
-        of = open("./data/information.d")
+        of = open("{}/data/information.d".format(path))
         hosts = of.readlines()
         of.close
         l = len(hosts)
@@ -123,7 +124,7 @@ def remove_host():
             # save
             c = raw_input("Remove?[y/n]:")
             if c.strip().upper() == "Y":
-                of = open("./data/information.d", "w")
+                of = open("{}/data/information.d".format(path), "w")
                 for l in hosts:
                     of.write(l)
                 print("Remove the success！")

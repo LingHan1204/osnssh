@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 #-*-coding:utf-8-*-
 import os, sys, base64
+path = os.path.dirname(os.path.abspath(sys.argv[0]))
 
 def choose():
-    of = open("./data/information.d")
+    
+    of = open("{}/data/information.d".format(path))
     hosts = of.readlines()
     l = len(hosts)
     if l <= 0:
