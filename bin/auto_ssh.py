@@ -17,7 +17,6 @@ def choose():
         os.system("clear")
         print("[Warning]Please add the host server")
         return
-    print hosts
     while 1:
         
         print("=================SSH===================")
