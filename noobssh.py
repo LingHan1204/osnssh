@@ -14,7 +14,7 @@ def main():
     while 1:
         
         print("==============NOOBSSH [Menu]=============")
-        print("1.Connection between a host\n2.Add host\n3.Remove host\n[Help]: q:quit   clear:clear screen")
+        print("1.Connection between a host\n2.Add host\n3.Remove host\n4.About\n[Help]: q:quit   clear:clear screen")
         print("="*40)
         c = raw_input("Please select a:")
         if c == 1 or c == "1":
@@ -23,6 +23,8 @@ def main():
             setting.add_host_main()
         if c == 3 or c == "3":
             setting.remove_host()
+        if c == 4 or c == "4":
+            setting.about()
         elif c == "clear":
             os.system("clear")
         elif c == "q" or c == "Q":

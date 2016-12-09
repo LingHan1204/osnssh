@@ -148,4 +148,19 @@ def str_format(lable, rule):
     
     return temp
 
+def about():
+       
+    of = open("{}/bin/about.dat".format(path))
+    rf = of.read()
+    try:
+        info = eval(rf)
+        os.system("clear")
+        print("================About noobssh================")
+        for k,v in info.items():
+            print("{}: {}".format(k, v))
+    except:
+        print("For failure.")
+    return
+
+    
     

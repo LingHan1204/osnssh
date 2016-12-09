@@ -18,7 +18,6 @@ def choose():
         print("=================SSH===================")
         print("+{}+".format("-"*40))
         print("|     Alias   UserName@IP:PORT")
-        print "---------",l
         for i in range(0, l):
             v_list = hosts[i].strip().split(" ")
             print("+{}+".format("-"*40))
