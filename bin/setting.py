@@ -34,6 +34,7 @@ def add_host():
     if name == "#q":
         return 1
     elif not name:
+        os.system("clear")
         print("[Warning]:User name cannot be emptyg")
         return 0
     
@@ -42,6 +43,7 @@ def add_host():
     if alias == "#q":
         return 1
     elif not alias:
+        os.system("clear")
         print("[Warning]:Alias cannot be emptyg")
         return 0
         
@@ -54,9 +56,11 @@ def add_host():
             continue
         l_list = l.split(" ")
         if host_ip == l_list[1] and host_port == l_list[2]:
+            os.system("clear")
             print("[Warning]{}:{} existing".format(host_ip, host_port))
             return 0
         if alias == l_list[4]:
+            os.system("clear")
             print("[Warning]Alias '{}' existing".format(alias))
             return 0
     
@@ -64,10 +68,11 @@ def add_host():
     
     # save
     of = open("{}/data/information.d".format(path), "a")
-    of.write("{} {} {} {} {}".format(name.strip("\n"), host_ip.strip("\n"), host_port, password.strip("\n"), alias.strip("\n")))
+    of.write("\n{} {} {} {} {}".format(name.strip("\n"), host_ip.strip("\n"), host_port, password.strip("\n"), alias.strip("\n")))
     of.close()
+    print("Add the success:{} {}@{}:{}".format(alias.strip("\n"), name.strip("\n"), host_ip.strip("\n"), host_port, password.strip("\n")))
     return 1
-    
+   
 def remove_host():
     while 1:
         
@@ -83,10 +88,17 @@ def remove_host():
         print("================Remove================")
         print("+{}+".format("-"*40))
         print("|     Alias   UserName@IP:PORT")
+        hosts_temp = []
+        n = 0
         for i in range(0, l):
+            if not hosts[i].strip():
+                continue
             v_list = hosts[i].strip().split(" ")
             print("+{}+".format("-"*40))
-            print("| {} | {}   {}@{}:{}".format(i+1, v_list[4], v_list[0], v_list[1], v_list[2]))
+            print("| {} | {}   {}@{}:{}".format(n+1, v_list[4], v_list[0], v_list[1], v_list[2]))
+            n += 1
+            hosts_temp.append(hosts[i])
+        hosts = hosts_temp[:]
         print("+{}+".format("-"*40))
         c = raw_input("[Remove]Choose the Number or Alias('#q' to exit):")
         is_alias = False
@@ -133,7 +145,7 @@ def remove_host():
 
 def str_format(lable, rule):
     while 1:
-        print(lable)
+        print("{} ('#q' exit)".format(lable))
         temp = raw_input().strip()
         m = re.match(r"{}".format(rule), temp)
         if m:
@@ -144,6 +156,7 @@ def str_format(lable, rule):
         elif temp.strip() == "#q":
             os.system("clear")
             break
+        os.system("clear")
         print("[Warning]:Invalid format")
     
     return temp

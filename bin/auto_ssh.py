@@ -7,12 +7,17 @@ def choose():
     
     of = open("{}/data/information.d".format(path))
     hosts = of.readlines()
+    hosts_temp = []
+    for h in hosts:
+        if h.strip():
+            hosts_temp.append(h)
+    hosts = hosts_temp[:]
     l = len(hosts)
     if l <= 0:
         os.system("clear")
         print("[Warning]Please add the host server")
         return
-            
+    print hosts
     while 1:
         
         print("=================SSH===================")
