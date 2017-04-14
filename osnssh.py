@@ -13,7 +13,7 @@ __author__ = 'allen woo'
 def main():
     while 1:
         
-        print("==============NOOBSSH [Menu]=============")
+        print("==============OSNSSH [Menu]=============")
         print("1.Connection between a host\n2.Add host\n3.Remove host\n4.About\n[Help]: q:quit   clear:clear screen")
         print("="*40)
         c = raw_input("Please select a:")
@@ -27,7 +27,7 @@ def main():
             setting.about()
         elif c == "clear":
             os.system("clear")
-        elif c == "q" or c == "Q":
+        elif c == "q" or c == "Q" or c == "quit":
             print("Bye")
             sys.exit()
         else:

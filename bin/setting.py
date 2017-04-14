@@ -168,7 +168,7 @@ def about():
     try:
         info = eval(rf)
         os.system("clear")
-        print("================About noobssh================")
+        print("================About osnssh================")
         for k,v in info.items():
             print("{}: {}".format(k, v))
     except:
