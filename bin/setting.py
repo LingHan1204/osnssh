@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #-*-coding:utf-8-*-
-import re, base64, os, sys
+import re, base64, os, sys, getpass
 path = os.path.dirname(os.path.abspath(sys.argv[0]))
 '''
 选项配置管理
@@ -146,7 +146,11 @@ def remove_host():
 def str_format(lable, rule):
     while 1:
         print("{} ('#q' exit)".format(lable))
-        temp = raw_input().strip()
+        if lable.strip().strip(":").upper() == "PASSWORD":
+	    temp = getpass.getpass()
+        else:
+
+            temp = raw_input().strip()
         m = re.match(r"{}".format(rule), temp)
         if m:
             break
