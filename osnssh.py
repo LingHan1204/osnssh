@@ -16,7 +16,7 @@ def main():
         print("==============OSNSSH [Menu]=============")
         print("1.Connection between a host\n2.Add host\n3.Remove host\n4.About\n[Help]: q:quit   clear:clear screen")
         print("="*40)
-        c = raw_input("Please select a:")
+        c = input("Please select a:")
         if c == 1 or c == "1":
             auto_ssh.choose()
         if c == 2 or c == "2":

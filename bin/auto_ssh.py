@@ -1,6 +1,6 @@
-#!/usr/bin/env python
 #-*-coding:utf-8-*-
 import os, sys, base64
+__author__ = 'Allen Woo'
 path = os.path.dirname(os.path.abspath(sys.argv[0]))
 
 def choose():
@@ -17,6 +17,8 @@ def choose():
         os.system("clear")
         print("[Warning]Please add the host server")
         return
+
+    password = ""
     while 1:
         
         print("=================SSH===================")
@@ -27,7 +29,7 @@ def choose():
             print("+{}+".format("-"*40))
             print("| {} | {}   {}@{}:{}".format(i+1, v_list[4], v_list[0], v_list[1], v_list[2]))
         print("+{}+".format("-"*40))
-        c = raw_input("[SSH]Choose the number or alias('#q' exit):")
+        c = input("[SSH]Choose the number or alias('#q' exit):")
         is_alias = False
         is_y = False
         try:
@@ -36,7 +38,7 @@ def choose():
                 os.system("clear")
                 print("[Warning]:There is no")
                 continue
-            l_list = hosts[c-1].split(" ")
+            l_list = hosts[c-1].strip("\n").split(" ")
             name = l_list[0]
             host = l_list[1]
             port = l_list[2]
@@ -63,8 +65,7 @@ def choose():
 
 
         # ssh
-        password = base64.decodestring(password)
-
+        password = base64.decodebytes(password.encode("utf-8")).decode("utf-8")
         print("In the connection...")
         print("{}@{}".format(name, host))
         if port == "22":
@@ -75,7 +76,7 @@ def choose():
   
 def connection(cmd, pwd):
     import pexpect
-    child = pexpect.spawn(cmd)
+    child = pexpect.spawn(cmd, maxread=10000)
     i = child.expect([".*password.*", ".*continue.*?", pexpect.EOF, pexpect.TIMEOUT])
     if( i == 0 ):
         child.sendline("{}\n".format(pwd))

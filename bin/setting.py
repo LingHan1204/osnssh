@@ -18,18 +18,17 @@ def add_host():
     
     print("================Add=====================")
     print("[Help]Input '#q' exit")
+    # host ip
     host_ip = str_format("Host IP:", "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$")
     if host_ip == "#q":
         return 1
-    
+
+    # host port
     host_port = str_format("Host port(Default 22):", "[0-9]+")
     if host_port == "#q":
         return 1
-    
-    password = str_format("Password:", ".*")
-    if password == "#q":
-        return 1
-    password = base64.encodestring(password)
+
+    # username
     name = str_format("User Name:", "^[^ ]+$")
     if name == "#q":
         return 1
@@ -37,40 +36,47 @@ def add_host():
         os.system("clear")
         print("[Warning]:User name cannot be emptyg")
         return 0
+
+    # password
+    password = str_format("Password:", ".*")
+    if password == "#q":
+        return 1
+    password = base64.encodebytes(password.encode("utf-8")).decode("utf-8")
+
+
     
     # The alias
-    alias = str_format("Local Alias:", "^[^ ]+$")
-    if alias == "#q":
-        return 1
-    elif not alias:
-        os.system("clear")
-        print("[Warning]:Alias cannot be emptyg")
-        return 0
-        
 
-    of = open("{}/data/information.d".format(path))
-    hosts = of.readlines()
-    for l in hosts:
-        l = l.strip("\n")
-        if not l:
-            continue
-        l_list = l.split(" ")
-        if host_ip == l_list[1] and host_port == l_list[2]:
-            os.system("clear")
-            print("[Warning]{}:{} existing".format(host_ip, host_port))
-            return 0
-        if alias == l_list[4]:
-            os.system("clear")
-            print("[Warning]Alias '{}' existing".format(alias))
-            return 0
-    
-    of.close()
+    with open("{}/data/information.d".format(path)) as of:
+        hosts = of.readlines()
+        while 1:
+            is_continue = False
+            alias = str_format("Local Alias:", "^[^ ]+$")
+            if alias == "#q":
+                return 1
+            elif not alias:
+                os.system("clear")
+                print("[Warning]:Alias cannot be empty")
+                continue
+            for l in hosts:
+                l = l.strip("\n")
+                if not l:
+                    continue
+                l_list = l.split(" ")
+                if alias == l_list[4]:
+                    os.system("clear")
+                    print("[Warning]Alias '{}' existing".format(alias))
+                    is_continue = True
+                    break
+            if is_continue:
+                continue
+            break
+
     
     # save
-    of = open("{}/data/information.d".format(path), "a")
-    of.write("\n{} {} {} {} {}".format(name.strip("\n"), host_ip.strip("\n"), host_port, password.strip("\n"), alias.strip("\n")))
-    of.close()
-    print("Add the success:{} {}@{}:{}".format(alias.strip("\n"), name.strip("\n"), host_ip.strip("\n"), host_port, password.strip("\n")))
+    with open("{}/data/information.d".format(path), "a") as of:
+        of.write("{} {} {} {} {}\n".format(name.strip("\n"), host_ip.strip("\n"), host_port, password.strip("\n"), alias.strip("\n")))
+    print("Add the success:{} {}@{}:{}".format(alias.strip("\n"), name.strip("\n"), host_ip.strip("\n"), host_port, password))
     return 1
    
 def remove_host():
@@ -100,7 +106,7 @@ def remove_host():
             hosts_temp.append(hosts[i])
         hosts = hosts_temp[:]
         print("+{}+".format("-"*40))
-        c = raw_input("[Remove]Choose the Number or Alias('#q' to exit):")
+        c = input("[Remove]Choose the Number or Alias('#q' to exit):")
         is_alias = False
         is_y = False
         try:
@@ -134,7 +140,7 @@ def remove_host():
         else:
             
             # save
-            c = raw_input("Remove?[y/n]:")
+            c = input("Remove?[y/n]:")
             if c.strip().upper() == "Y":
                 of = open("{}/data/information.d".format(path), "w")
                 for l in hosts:
@@ -147,10 +153,10 @@ def str_format(lable, rule):
     while 1:
         print("{} ('#q' exit)".format(lable))
         if lable.strip().strip(":").upper() == "PASSWORD":
-	    temp = getpass.getpass()
+            temp = getpass.getpass()
         else:
 
-            temp = raw_input().strip()
+            temp = input().strip()
         m = re.match(r"{}".format(rule), temp)
         if m:
             break
