@@ -7,3 +7,7 @@ pip install -r requirements.txt
 
 # use
 python osnssh.py
+
+# or use
+alias ossh='python /{you_path}/osnssh.py'
+ossh
