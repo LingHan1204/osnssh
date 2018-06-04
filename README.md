@@ -9,5 +9,5 @@ pip install -r requirements.txt
 python osnssh.py
 
 # or use
-alias ossh='python /{you_path}/osnssh.py'</b>
+alias ossh='python /{you_path}/osnssh.py' </br>
 ossh
