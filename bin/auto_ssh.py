@@ -24,10 +24,10 @@ def choose():
         print("=================SSH===================")
         print("+{}+".format("-"*40))
         print("|     Alias   UserName@IP:PORT")
+        print("+{}+".format("-"*40))
         for i in range(0, l):
             v_list = hosts[i].strip().split(" ")
-            print("+{}+".format("-"*40))
-            print("| {} | {}   {}@{}:{}".format(i+1, v_list[4], v_list[0], v_list[1], v_list[2]))
+            print(" {} | {}   {}@{}:{}".format(i+1, v_list[4], v_list[0], v_list[1], v_list[2]))
         print("+{}+".format("-"*40))
         c = input("[SSH]Choose the number or alias('#q' exit):")
         is_alias = False
@@ -72,7 +72,7 @@ def choose():
             connection("ssh {}@{}".format(name, host), password)
            
         else:
-            connection("ssh {}@{}:{}".format(name, host, port), password)
+            connection("ssh {}@{} -p {}".format(name, host, port), password)
   
 def connection(cmd, pwd):
     import pexpect
